@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <script>
+        function validateForm(){
+                var username = document.loginForm.username.value;
+                var password = document.loginForm.password.value;
+                
+                if (username==null || username==""){
+                    alert("Name can't be blank!");
+                    return false;
+                }
+                else if(password==null || password==""){
+                    alert("Password can't be blank!");
+                    return false;
+                }
+            }
+    </script>
+    <form name="loginForm" method="post" onsubmit="return validateForm()" action="{% url 'login:auth' %}">{% csrf_token %}
+        <fieldset>
+            <legend><h1>LOGIN</h1></legend>
+            <label for="username">Username: </label><input name="username" type="text"/><br/>
+            <label for="password">Password: </label><input name="password" type="password"/><br/><br/>
+            <!-- forgot password? -->
+            <!-- register -->
+            <button value="submit" type="submit">Submit</button><br/>
+        </fieldset>
+    </form>
+</body>
+</html>
