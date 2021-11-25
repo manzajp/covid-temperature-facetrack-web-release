@@ -10,6 +10,13 @@ class LoginView(generic.ListView):
     model = User
     template_name = 'login/login.html'
 
+def LandingView(request):
+    return render(request, "login/landing.html")
+
+def LogoutView(request):
+    return render(request, "login/logout.html")
+
+# login data to dashboard
 def auth(request):
     try:
         user = User.objects.get(userName=request.POST['username'])
@@ -17,8 +24,12 @@ def auth(request):
         response = "User does not exists."
         return HttpResponse(response)
     else:
-        response = "Name is " + user.userName + ". <br/>Password is " + user.password + "."
-        return HttpResponse(response)
+        if user.password == request.POST['password']:
+            response = "Name is " + user.userName + ". <br/>Password is " + user.password + "."
+            return HttpResponse(response)
+        else:
+            response = "Password incorrect."
+            return HttpResponse(response)
 
 
 
