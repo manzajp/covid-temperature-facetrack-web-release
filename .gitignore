@@ -1,0 +1,5 @@
+covid_web/camera_management/__init__.py
+covid_web/camera_management/__pycache__/
+covid_web/camera_management/migrations/__pycache__/
+covid_web/login/migrations/__pycache__/
+covid_web/media
