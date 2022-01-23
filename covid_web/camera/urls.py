@@ -18,4 +18,5 @@ urlpatterns = [
     path('images/', views.ImageList.as_view()),
     path('cameraForm/', views.CameraForm.as_view(), name='cameraForm'),
     path('cameraForm/response', views.cameraAdd, name='cameraAdd'),
+    path('image/add', views.imageAdd, name='imageAdd'),
 ]
