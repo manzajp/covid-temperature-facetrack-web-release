@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        {% load static %}
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{% static 'polls/styles.css' %}">
-
-        <title>COVID Tracker</title>
-    </head>
-    <body>
-        <div class="min-vh-100 text-center d-flex flex-column justify-content-center">
-            <h1 class="display-5 fw-bold">COVID Patient Face Tracker and Detector</h1>
-            <div class="col-lg-6 mx-auto">
-                <p class="lead mb-4">Use any camera and a simple sensor to monitor people and track their temperature.</p>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                    <form action="{% url 'login:login' %}">
-                        <input type="submit" class="btn btn-primary btn-lg px-4 gap-3" value="Login" />
-                    </form>
-                </div>
+    {% load static %}
+    <title>Landing Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'login/landing.css' %}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="landing-page">   
+        <header id="header">
+            <nav id="nav-bar">
+                <a href="#"><img src="{% static 'login/images/logo.png' %}" id="header-img"></a>                
+                <ul>
+                    <li><a class="nav-link" href="#">Home</a></li>
+                    <li><a class="nav-link" href="{% url 'login:aboutus' %}">About Us</a></li>
+                </ul>
+                <a class="btn btn-primary" id="btn-rg" href="{% url 'login:login' %}" role="button">Login</a>
+            </nav>
+        </header>
+        <div class="content">
+            <div class="col-40">
+                <h2>Let's Break<br><span id="highlight-text">The COVID-19 Chain</span> Together</h2>
+            </div>
+            <div class="col-60">
+                <img id="bg-image" src="{% static 'login/images/bg.png' %}" alt="">
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

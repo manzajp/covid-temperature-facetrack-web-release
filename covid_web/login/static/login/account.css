@@ -1,0 +1,231 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&&display=swap");
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+:root{
+    --blue1: #0257b9;
+    --blue2: #1683ff;
+    --menuBg: #eaf4ff;
+    --white: #fff;
+    --grey: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+    --bg: #fbfefd;
+    --shadow: rgba(17, 17, 26,0.1) 2px 2px 16px;
+}
+
+body{
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--bg);
+}
+
+.sidebar{
+    width: 345px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding: 1rem 1.2rem;
+}
+
+
+.sidebar-container{
+    height: 100%;
+    width: 100%;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 1.2rem;
+    border: 1px solid var(--black2);
+}
+
+.sidebar-logo{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.sidebar-logo img{
+    width: auto;
+    height: 80px;
+}
+
+
+.sidebar-avatar{
+    margin: 0 auto;
+    width: 220px;
+    align-self: center;
+    display: grid;
+    grid-template-columns: 30px auto;
+    align-items: center;
+    padding: .3rem 1rem;
+    border-radius: 7px;
+    border: 1px solid var(--black2);
+    box-shadow: var(--shadow);
+}
+
+.sidebar-avatar img{
+    justify-self: center;
+    align-self: center;
+    width: 30px;
+}
+
+.sidebar-avatar-info{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: .1rem 1rem;
+}
+
+.sidebar-avatar-info h4{
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--black1);
+}
+
+.sidebar-avatar-info small{
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: var(--black2);
+}
+
+.sidebar-menu{
+    margin: 2rem 0;
+}
+
+.sidebar-menu ul li{
+    margin-bottom: 1rem;
+    display: flex;
+}
+
+.sidebar-menu ul li a{
+    color: var(--black1);
+    width: 220px;
+    display: block;
+    padding: .5rem .2rem;
+    margin: 0 auto;
+}
+
+.sidebar-menu ul li.active a{
+    background-color: var(--menuBg);
+    border-radius: 7px;
+    color: var(--blue1);
+}
+
+.sidebar-menu a span:first-child{
+    display: inline-block;
+    margin-left: 1rem;
+    margin-right: 0.8rem;
+    font-size: 1.5rem;
+    color: var(--blue1);
+    vertical-align: middle;
+}
+
+.sidebar-menu-text{
+    font-size: 0.8rem;
+    justify-self: center;
+    align-self: center;
+}
+
+.sidebar-menu ul li:last-child{
+    margin: 8rem auto 0 auto;
+    width: 140px;
+}
+
+.main-content{
+    margin-left: 345px;
+    width: calc(100vw - 345px);
+    padding: 1rem 1.2rem;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding: 1rem 1.2rem;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.content h3{
+    padding: .5rem 1.2rem 0 1.2rem;
+    margin-top: 10px;
+    margin-left: 4.5rem;
+}
+
+.content-title{
+    display: flex;
+    flex-direction: row;
+    padding-left: 1rem;
+}
+
+.form-container{
+    width: 80%;
+    padding: .5rem 1.2rem 0 1.2rem;
+    margin: 2rem auto;
+    background-color: var(--white);
+    height: calc(100vw - 62px);
+}
+
+.form-password label{
+    color: var(--black2);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-left: 2px;
+    margin-top: 10px;
+}
+
+.input-text{
+    border: none;
+    border-bottom: 1px solid var(--blue1);
+    width: 80%;
+    font-size: 1em;
+    padding: 12px 12px;
+    margin-bottom: 20px;
+    color: var(--blue1);
+}
+
+.input-text:focus{
+    outline: none;
+}
+
+.readonly{
+    border: none;
+    width: 80%;
+    font-size: 1em;
+    padding: 12px 0;
+    margin-bottom: 20px;
+    color: var(--blue1);
+    pointer-events: none;
+}
+
+.btn-submit{
+    width: 100px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    background-color: var(--blue1);
+    color: white;
+    margin: 30px auto;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: var(--blue2);
+}

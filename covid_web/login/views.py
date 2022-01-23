@@ -1,62 +1,89 @@
-from django.http import HttpResponseRedirect, HttpResponse
+from pyexpat import model
+from urllib import request
+from django.http import HttpResponse
 from django.utils import timezone
-from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
-from django.views import generic
+from django.shortcuts import redirect
+from django.views.generic import TemplateView, DetailView, ListView
 
 from .models import User
+from camera.models import Camera
 
-class LoginView(generic.ListView):
-    model = User
+class LandingView(TemplateView):
+    template_name = "login/landing.html"
+
+class AboutUsView(TemplateView):
+    template_name = "login/aboutus.html"
+
+class RegisterView(TemplateView):
+    template_name = "login/register.html"
+
+def register(request):
+    try:
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        oldUser = User.objects.get(userName=request.POST['username'])
+
+    except(User.DoesNotExist):
+        newUser = User(userName=username, email = email, password = password, date = timezone.now())
+        newUser.save()
+        # should be success page
+        return redirect('login:login')
+
+    else:
+        response = "User existed."
+        return HttpResponse(response)
+
+class LoginView(TemplateView):
     template_name = 'login/login.html'
-
-def LandingView(request):
-    return render(request, "login/landing.html")
-
-def LogoutView(request):
-    return render(request, "login/logout.html")
 
 # login data to dashboard
 def auth(request):
     try:
-        user = User.objects.get(userName=request.POST['username'])
+        username = request.POST['username']
+        user = User.objects.get(userName=username)
     except (User.DoesNotExist):
         response = "User does not exists."
         return HttpResponse(response)
     else:
-        if user.password == request.POST['password']:
-            response = "Name is " + user.userName + ". <br/>Password is " + user.password + "."
-            return HttpResponse(response)
+        if user.allowed == True:
+            if user.password == request.POST['password']:
+                request.session['username'] = username
+                request.session['email'] = user.email
+                return redirect('login:dashboard')
+            else:
+                response = "Password incorrect."
+                return HttpResponse(response)
         else:
-            response = "Password incorrect."
+            response = "Registration not approved by admin. Please wait at least 1 day or contact the admin if urgent."
             return HttpResponse(response)
 
+class DashboardView(ListView):
+    model = Camera
+    context_object_name = 'camera_list'
+    template_name = 'login/dashboard.html'
 
+    def get_queryset(self):
+        user = User.objects.get(userName=self.request.session['username'])
+        queryset = Camera.objects.all()
+        # queryset = queryset.filter(owner=user)
+        return queryset
 
-# class SuccessView(generic.SuccessView):
-#     model = User
-#     template_name = 'login/success.html'
+class AccountView(TemplateView):
+    template_name = "login/account.html"
 
+def acc_change(request):
+    username = request.session['username']
+    password = request.POST['password']
+    user = User.objects.get(userName=username)
+    user.password = password
+    user.save()
 
+    return redirect('login:dashboard')
+    
+class LogoutView(TemplateView):
+    template_name = "login/logout.html"
 
-# class ResultsView(generic.DetailView):
-#     model = Question
-#     template_name = 'polls/results.html'
-
-# def vote(request, question_id):
-#     question = get_object_or_404(Question, pk=question_id)
-#     try:
-#         selected_choice = question.choice_set.get(pk=request.POST['choice'])
-#     except (KeyError, Choice.DoesNotExist):
-#         # Redisplay the question voting form.
-#         return render(request, 'polls/detail.html', {
-#             'question': question,
-#             'error_message': "You didn't select a choice.",
-#         })
-#     else:
-#         selected_choice.votes += 1
-#         selected_choice.save()
-#         # Always return an HttpResponseRedirect after successfully dealing
-#         # with POST data. This prevents data from being posted twice if a
-#         # user hits the Back button.
-#         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+def logout_control(request):
+    request.session.flush()
+    return redirect('login:landing')
