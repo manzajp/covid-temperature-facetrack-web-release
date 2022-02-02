@@ -3,12 +3,12 @@ from statistics import mode
 from rest_framework import serializers
 from .views import Camera, Image
 
-class CameraSerializer(serializers.HyperlinkedModelSerializer):
+class CameraSerializer(serializers.ModelSerializer):
     class Meta:
         model = Camera
         fields = ['cameraName', 'ipAddress']
 
-class ImageSerializer(serializers.HyperlinkedModelSerializer):
+class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = ['imageName', 'image']
+        fields = ['imageName', 'image', 'temp', 'camera']

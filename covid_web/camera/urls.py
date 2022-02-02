@@ -18,5 +18,6 @@ urlpatterns = [
     path('images/', views.ImageList.as_view()),
     path('cameraForm/', views.CameraForm.as_view(), name='cameraForm'),
     path('cameraForm/response', views.cameraAdd, name='cameraAdd'),
-    path('image/add', views.imageAdd, name='imageAdd'),
+    path('cameraForm/response/delete', views.cameraDel, name='cameraDel'),
+    # path('api/image/add', views.ImageAPIadd.as_view(), name='imageAdd'),
 ]

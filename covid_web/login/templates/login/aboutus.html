@@ -15,12 +15,12 @@
     <div id="landing-page">   
         <header id="header">
             <nav id="nav-bar">
-                <a href="{% url 'login:landing' %}"><img src="{% static 'login/images/logo.png' %}" id="header-img"></a>                
-                <ul>
-                    <li><a class="nav-link" href="{% url 'login:landing' %}">Home</a></li>
-                    <li><a class="nav-link" href="#">About Us</a></li>
-                </ul>
-                <a class="btn btn-primary" id="btn-rg" href="{% url 'login:login' %}" role="button">Login</a>
+                <a href="#"><img src="{% static 'login/images/logo.png' %}" id="header-img"></a>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a href="{% url 'login:landing' %}" class="btn btn-outline-primary">Home</a>
+                    <a href="#" class="btn btn-outline-primary active">About Us</a>
+                    <a href="{% url 'login:login' %}" class="btn btn-outline-primary">Login</a>
+                </div>
             </nav>
         </header>
         <div class="content">

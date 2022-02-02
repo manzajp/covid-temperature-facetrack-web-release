@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.views.generic import TemplateView, DetailView, ListView
 
 from .models import User
-from camera.models import Camera
+from camera.models import Camera, Image
 
 class LandingView(TemplateView):
     template_name = "login/landing.html"
@@ -63,14 +63,26 @@ class DashboardView(ListView):
     context_object_name = 'camera_list'
     template_name = 'login/dashboard.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(DashboardView, self).get_context_data(**kwargs)
+        context.update({
+            'images_list': Image.objects.all(),
+        })
+        return context
+
     def get_queryset(self):
         user = User.objects.get(userName=self.request.session['username'])
         queryset = Camera.objects.all()
-        # queryset = queryset.filter(owner=user)
+        queryset = queryset.filter(owner=user)
         return queryset
 
 class AccountView(TemplateView):
     template_name = "login/account.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = User.objects.get(username=self.request.session['username'])
+        return context
 
 def acc_change(request):
     username = request.session['username']
